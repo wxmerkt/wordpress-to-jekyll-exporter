@@ -398,6 +398,12 @@ class Jekyll_Export {
 		} else {
 			$filename = '_' . get_post_type( $post ) . 's/' . gmdate( 'Y-m-d', strtotime( $post->post_date ) ) . '-' . sanitize_file_name( $post->post_name ) . '.md';
 		}
+		
+		// Make sure the filename is not too long (~255 characters) as this causes trouble unzipping.
+		if (strlen($filename) >= 200) {
+			$length = strlen($filename);
+			$filename = substr($filename, 0, 200) . '.md';
+		}
 
 		$wp_filesystem->mkdir( $this->dir . dirname( $filename ) );
 		$wp_filesystem->put_contents( $this->dir . $filename, $output );
