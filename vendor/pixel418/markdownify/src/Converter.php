@@ -147,8 +147,7 @@ class Converter
         'form',
         'area',
         'object',
-        'param',
-        'iframe',
+        'param'
     ];
 
     /**
